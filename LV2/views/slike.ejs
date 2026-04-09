@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galerija slika</title>
+
+  <link rel="stylesheet" href="/style/style.css">
+  <link rel="stylesheet" href="/style/style_slike.css">
+</head>
+
+<body>
+
+<header>
+  <h1>Galerija slika</h1>
+</header>
+
+<p><a href="/">Nazad na početnu</a></p>
+
+<% if (images.length) { %>
+  <section class="galerija" aria-label="Galerija slika">
+    <% images.forEach((image, index) => { %>
+      <figure class="galerija_slika">
+        <a href="#lightbox<%= index + 1 %>">
+          <img src="<%= image.url %>" alt="<%= image.title %>" loading="lazy">
+        </a>
+        <figcaption><%= image.title %></figcaption>
+      </figure>
+    <% }) %>
+  </section>
+
+  <% images.forEach((image, index) => { %>
+    <div id="lightbox<%= index + 1 %>" class="lightbox" aria-hidden="true">
+      <a href="#" class="close" aria-label="Zatvori prikaz slike"></a>
+      <img src="<%= image.url %>" alt="<%= image.title %>">
+    </div>
+  <% }) %>
+<% } else { %>
+  <p>U mapi public/images nema dostupnih slika.</p>
+<% } %>
+
+</body>
+</html>
