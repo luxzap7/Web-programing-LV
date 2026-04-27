@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Web stranica o filmovima">
+  <title>Primjer HTML5 stranice</title>
+  <link rel="stylesheet" href="/style/style.css">
+
+  <!-- PapaParse za parsiranje CSV datoteke -->
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  <script src="/script.js" defer></script>
+</head>
+<body>
+  <header>
+    <h1>Dobrodošli na moju web stranicu</h1>
+  </header>
+
+  <div class="navigation">
+    <ul>
+      <li><a href="index.html">Početna</a></li>
+      <li><a href="slike.html">Slike</a></li>
+      <li><a href="grafikom.html">Grafikon</a></li>
+    </ul>
+  </div>
+
+  <div id="hamburger-menu">
+    <input type="checkbox" id="menu-toggle" aria-label="Toggle navigation" />
+    <label for="menu-toggle" class="hamburger-button">&#9776;</label>
+    <nav class="nav-links" aria-hidden="true">
+      <ul>
+        <li><a href="index.html">Početna</a></li>
+        <li><a href="slike.html">Slike</a></li>
+        <li><a href="grafikom.html">Grafikon</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <h1>Popis Filmova</h1>
+
+  <!-- FILTRI (ZADATAK 2) -->
+  <div class="filters-container">
+    <h2>Filtri</h2>
+    
+    <!-- Filter 1: Žanr (padajući izbornik) -->
+    <div class="filter-group">
+      <label for="filter-genre">Žanr:</label>
+      <select id="filter-genre">
+        <option value="">-- Svi žanrovi --</option>
+      </select>
+    </div>
+
+    <!-- Filter 2: Minimalna ocjena (slider) -->
+    <div class="filter-group">
+      <label for="filter-rating">Minimalna ocjena: <span id="rating-value">0</span></label>
+      <input type="range" id="filter-rating" min="0" max="10" step="0.5" value="0">
+    </div>
+
+    <!-- Filter 3: Pretraživanje naslova (tekstualno polje) -->
+    <div class="filter-group">
+      <label for="filter-search">Pretraživanje naslova:</label>
+      <input type="text" id="filter-search" placeholder="Upiši naziv filma...">
+    </div>
+
+    <button id="reset-filters">Resetiraj filtere</button>
+  </div>
+
+  <!-- TABLICA FILMOVA -->
+  <div class="table-images-container">
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Naslov</th>
+            <th>Godina</th>
+            <th>Žanr</th>
+            <th>Trajanje</th>
+            <th>Država</th>
+            <th>Ocjena</th>
+            <th>Akcija</th>
+          </tr>
+        </thead>
+        <tbody id="filmovi-tablica"></tbody>
+      </table>
+    </div>
+
+    <aside>
+      <div class="images">
+        <img src="/images/slika1.jpg" alt="Slika 1">
+        <img src="/images/slika2.jpg" alt="Slika 2">
+      </div>
+      <div class="images_small">
+        <img src="https://unsplash.it/300/200?random=1" alt="Slika 1">
+        <img src="https://unsplash.it/300/200?random=2" alt="Slika 2">
+      </div>
+    </aside>
+  </div>
+
+  <!-- KOŠARICA (ZADATAK 3) -->
+  <div class="cart-container">
+    <h2>Košarica za posudbu</h2>
+    <p id="cart-count">Odabranih filmova: 0</p>
+    <div id="cart-items"></div>
+    <button id="confirm-cart" style="display: none;">Potvrdi posudbu</button>
+    <div id="cart-message"></div>
+  </div>
+
+  <section>
+    <h2>Ovo je glavna sekcija</h2>
+    <p>HTML5 omogućava semantičku strukturu koja poboljšava pristupačnost i SEO.</p>
+  </section>
+
+  <article>
+    <h2>Najnovije vijesti</h2>
+    <p>Ovdje se nalazi članak s važnim informacijama.</p>
+  </article>
+
+  <footer>
+    <p>&copy; 2026. Web Programiranje. Sva prava pridržana.</p>
+  </footer>
+</body>
+</html>
