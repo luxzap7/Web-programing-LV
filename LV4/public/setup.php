@@ -3,6 +3,7 @@ require_once __DIR__ . '/includes/db.php';
 
 $sql = file_get_contents(__DIR__ . '/../lv4_baza.sql');
 
+// Ukloni komentare
 $sql = preg_replace('/--.*$/m', '', $sql);
 $sql = preg_replace('/\/\*.*?\*\//s', '', $sql);
 
@@ -24,7 +25,7 @@ foreach ($statements as $stmt) {
 echo "<h1>Setup završen!</h1>";
 echo "<p>Uspješno izvršeno: $success naredbi</p>";
 if ($errors) {
-    echo "<h2>Greške:</h2><ul>";
+    echo "<h2>Greške (normalno ako tablice već postoje):</h2><ul>";
     foreach ($errors as $err) {
         echo "<li>" . htmlspecialchars($err) . "</li>";
     }

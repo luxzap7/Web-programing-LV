@@ -131,7 +131,12 @@ require_once __DIR__ . '/includes/header.php';
 
 <!-- TABLICA FILMOVA -->
 <div class="table-wrapper" style="max-width:1200px; margin:20px auto; padding:0 20px;">
-    <p><strong>Pronađeno filmova: <?= count($filmovi) ?></strong></p>
+    <p>
+        <strong>Pronađeno filmova: <?= count($filmovi) ?></strong>
+        <?php if (jePrijavljen()): ?>
+            <a href="film_add.php" class="btn btn-primary" style="width:auto; display:inline-block; padding:8px 16px; margin-left:15px;">+ Dodaj film</a>
+        <?php endif; ?>
+    </p>
     <table>
         <thead>
             <tr>
@@ -157,6 +162,13 @@ require_once __DIR__ . '/includes/header.php';
                         <input type="hidden" name="id_filma" value="<?= $film['id'] ?>">
                         <button type="submit" name="dodaj_film" class="add-cart-btn">Dodaj u videoteku</button>
                     </form>
+                    <?php if (jeAdmin()): ?>
+                        <a href="film_edit.php?id=<?= $film['id'] ?>" class="btn-small" style="margin-left:5px;">Uredi</a>
+                        <form method="POST" action="film_delete.php" style="display:inline;" onsubmit="return confirm('Obrisati film?')">
+                            <input type="hidden" name="id_filma" value="<?= $film['id'] ?>">
+                            <button type="submit" class="remove-btn" style="font-size:0.8em; padding:4px 8px;">Obriši</button>
+                        </form>
+                    <?php endif; ?>
                 </td>
                 <?php endif; ?>
             </tr>

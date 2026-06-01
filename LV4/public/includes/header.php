@@ -29,6 +29,9 @@ require_once __DIR__ . '/auth.php';
             <li><a href="grafikon.php">Grafikon</a></li>
             <?php if (jePrijavljen()): ?>
                 <li><a href="cart.php">Moja videoteka</a></li>
+                <?php if (jeAdmin()): ?>
+                    <li><a href="dashboard.php">Admin</a></li>
+                <?php endif; ?>
                 <li class="nav-right"><a href="logout.php">Odjava (<?= htmlspecialchars(getKorisnickoIme()) ?>)</a></li>
             <?php else: ?>
                 <li class="nav-right"><a href="login.php">Prijava</a></li>
@@ -48,6 +51,9 @@ require_once __DIR__ . '/auth.php';
                 <li><a href="grafikon.php">Grafikon</a></li>
                 <?php if (jePrijavljen()): ?>
                     <li><a href="cart.php">Moja videoteka</a></li>
+                    <?php if (jeAdmin()): ?>
+                        <li><a href="dashboard.php">Admin</a></li>
+                    <?php endif; ?>
                     <li><a href="logout.php">Odjava</a></li>
                 <?php else: ?>
                     <li><a href="login.php">Prijava</a></li>

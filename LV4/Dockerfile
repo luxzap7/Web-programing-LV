@@ -3,11 +3,15 @@ FROM php:8.2-apache
 # Instaliraj PHP MySQL ekstenzije
 RUN docker-php-ext-install mysqli pdo pdo_mysql
 
+# Omogući upload fajlova
+RUN echo "upload_max_filesize = 5M\npost_max_size = 6M" > /usr/local/etc/php/conf.d/uploads.ini
+
 # Postavi DocumentRoot na public/ folder
 RUN sed -i 's|/var/www/html|/var/www/html/public|g' /etc/apache2/sites-available/000-default.conf
 
 # Kopiraj projekt
 COPY . /var/www/html/
 RUN chown -R www-data:www-data /var/www/html
+RUN chmod -R 775 /var/www/html/public/images
 
 EXPOSE 80
