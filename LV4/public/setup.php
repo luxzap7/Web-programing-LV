@@ -3,27 +3,28 @@ require_once __DIR__ . '/includes/db.php';
 
 $sql = file_get_contents(__DIR__ . '/../lv4_baza.sql');
 
-// Razdvoji na pojedinačne naredbe
+$sql = preg_replace('/--.*$/m', '', $sql);
+$sql = preg_replace('/\/\*.*?\*\//s', '', $sql);
+
 $statements = array_filter(array_map('trim', explode(';', $sql)));
 
 $success = 0;
 $errors = [];
 
 foreach ($statements as $stmt) {
-    if (empty($stmt) || strpos($stmt, '--') === 0) continue;
+    if (empty($stmt)) continue;
     try {
         $pdo->exec($stmt);
         $success++;
     } catch (PDOException $e) {
-        $errors[] = $e->getMessage();
+        $errors[] = substr($stmt, 0, 60) . "... → " . $e->getMessage();
     }
 }
 
 echo "<h1>Setup završen!</h1>";
 echo "<p>Uspješno izvršeno: $success naredbi</p>";
 if ($errors) {
-    echo "<h2>Greške (mogu biti normalne ako tablice već postoje):</h2>";
-    echo "<ul>";
+    echo "<h2>Greške:</h2><ul>";
     foreach ($errors as $err) {
         echo "<li>" . htmlspecialchars($err) . "</li>";
     }
